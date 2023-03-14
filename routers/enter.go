@@ -5,11 +5,15 @@ import (
 	"gvb_server/global"
 )
 
+type RouterGroup struct {
+	*gin.RouterGroup
+}
+
 func InitRouter() *gin.Engine {
 	gin.SetMode(global.Config.System.Env)
 	router := gin.Default()
-	router.GET("", func(ctx *gin.Context) {
-		ctx.String(200, "xxx")
-	})
+	apiRouter := router.Group("/api")
+	routerGroupApp := RouterGroup{apiRouter}
+	routerGroupApp.SettingsRouter()
 	return router
 }

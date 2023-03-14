@@ -248,7 +248,7 @@ func InitDefaultLogger() {
 ### 路由配置
 安装`go get github.com/gin-gonic/gin`
 ```go
-// core/
+// config/conf_system.go
 func (s System) Addr() string {
   return fmt.Sprintf("%s:%v", s.Host, s.Port)
 }
