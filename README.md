@@ -159,6 +159,8 @@ func MysqlConnect() *gorm.DB {
 
 ```
 ### 日志配置
+
+安装`go get github.com/sirupsen/logrus`
 ```go
 // core/logrus.go
 package core
@@ -241,5 +243,30 @@ func InitDefaultLogger() {
 	logrus.SetLevel(level)
 }
 
+
+```
+### 路由配置
+安装`go get github.com/gin-gonic/gin`
+```go
+// core/
+func (s System) Addr() string {
+  return fmt.Sprintf("%s:%v", s.Host, s.Port)
+}
+// routers/enter.go
+package routers
+
+import (
+	"github.com/gin-gonic/gin"
+	"gvb_server/global"
+)
+
+func InitRouter() *gin.Engine {
+	gin.SetMode(global.Config.System.Env)
+	router := gin.Default()
+	router.GET("", func(ctx *gin.Context) {
+		ctx.String(200, "xxx")
+	})
+	return router
+}
 
 ```
